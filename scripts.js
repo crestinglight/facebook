@@ -67,9 +67,34 @@ window.addEventListener("load", function(){
 		}
 		return newLike;
 	}
+
+	function commentSubmit(){
+		
+		if (this.parentNode.childNodes[1].value == ""){
+			alert("The text box is currently empty! Type in your comment and I'll submit it for you.");
+		}
+		else {
+			updateCommentCounter();
+			alert("There's something here.");
+		}
+	}
+
+	function updateCommentCounter(){
+		commentArray = document.getElementsByClassName("post__info").childNodes[1];
+		debugger;
+	}
+
+	function commentFocus(){
+		
+		document.getElementsByClassName("opcomment")[0].focus();
+	}
 	
 	var replyCountArray = document.getElementsByClassName("replyCount");
 	var likeCountArray = document.getElementsByClassName("likeClick");
+	var submitCommentArray = document.getElementsByClassName("submitComment");
+	var commentClick = document.getElementsByClassName("action action--comment");
+
+	commentClick[0].addEventListener('click', commentFocus);
 
 	for (var i = 0; i < replyCountArray.length; i++){
 		replyCountArray[i].addEventListener('click', showReplies);
@@ -77,6 +102,10 @@ window.addEventListener("load", function(){
 
 	for (var x = 0; x < likeCountArray.length; x++){
 		likeCountArray[x].addEventListener('click', clickLike);
+	}
+
+	for (var y = 0; y < submitCommentArray.length; y++){
+		submitCommentArray[y].addEventListener('click', commentSubmit);
 	}
 		// var clicketyLike = document.getElementsByClassName("likeClick")[0];
 
