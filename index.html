@@ -16,7 +16,7 @@
         <img src="images/Evin.jpg" class="profilePhoto">
 
         <div class="media__info">
-          <a href="#">Evin</a>
+          <a href="#" class="userName" data-friends="32">Evin</a>
           <div>Yesterday at 10:00am</div>
         </div>
       </div>
@@ -35,7 +35,7 @@
     <div class="post__details">
       <div class="post__info">
         <span>28 likes</span>
-        <span>3 comments</span>
+        <span class="commentCount">3 comments</span>
       </div>
 
       <div class="post__comments">
@@ -43,7 +43,7 @@
           <img src="images/Jeffy.jpg" class="profilePhoto">
 
           <div class="media__info">
-            <a href="#">Jeff</a>
+            <a href="#" class="userName" data-friends="895">Jeff</a>
             Hey, I just learned the word "modal" today! Have fun implementing one...
 
             <div class="comment__info">
@@ -58,7 +58,7 @@
                 <img src="images/Ryan.jpg" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Ryan</a>
+                  <a href="#" class="userName" data-friends="1">Ryan</a>
                   My beard is amazing. Just fyi. Also, I don't do the internetz.
 
                   <div class="comment__info">
@@ -74,7 +74,7 @@
                 <img src="images/Glenn.jpg" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Glenn</a>
+                  <a href="#" class="userName" data-friends="63">Glenn</a>
                   What's a modal? BTW, I'm the traitor.
 
                   <div class="comment__info">
@@ -90,7 +90,7 @@
                 <img src="images/Kayla.jpg" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Kayla</a>
+                  <a href="#" class="userName" data-friends="1,452">Kayla</a>
                   Hey Jeff, I found this really great beer you'd like! You gotta try it with me.
 
                   <div class="comment__info">
@@ -105,7 +105,7 @@
                       <img src="images/Meredith.jpg" class="profilePhoto">
 
                       <div class="media__info">
-                        <a href="#">Meredith</a>
+                        <a href="#" class="userName" data-friends="1,378">Meredith</a>
                         Sounds great, happy hour?
 
                         <div class="comment__info">
@@ -121,7 +121,7 @@
                       <img src="images/Ryan.jpg" class="profilePhoto">
 
                       <div class="media__info">
-                        <a href="#">Ryan</a>
+                        <a href="#" class="userName" data-friends="1">Ryan</a>
                         I wish I could, but I have work. As always.
 
                         <div class="comment__info">
@@ -151,7 +151,7 @@
                 <img src="images/Turtle.jpg" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Turtle</a>
+                  <a href="#" class="userName" data-friends="666">Turtle</a>
                   They didn't teach us about modals in the hood.
 
                   <div class="comment__info">
@@ -181,7 +181,7 @@
           <img src="images/user.png" class="profilePhoto">
 
           <div class="media__info">
-            <a href="#">Aaron</a>
+            <a href="#" class="userName" data-friends="0">Aaron</a>
             BOY'S NIGHT TOMORROW!!! Evin, you're not invited.
 
             <div class="comment__info">
@@ -210,7 +210,7 @@
           <img src="images/user.png" class="profilePhoto">
 
           <div class="media__info">
-            <a href="#">Rachel</a>
+            <a href="#" class="userName" data-friends="756">Rachel</a>
             I haven't seen you guys in forever.
 
             <div class="comment__info">
@@ -225,7 +225,7 @@
                 <img src="images/Glenn.jpg" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Glenn</a>
+                  <a href="#" class="userName" data-friends="63">Glenn</a>
                   I know, where you been?
 
                   <div class="comment__info">
@@ -241,7 +241,7 @@
                 <img src="images/Jeffy.jpg" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Jeff</a>
+                  <a href="#" class="userName" data-friends="895">Jeff</a>
                   We miss you!
 
                   <div class="comment__info">
@@ -256,7 +256,7 @@
                       <img src="images/Meredith.jpg" class="profilePhoto">
 
                       <div class="media__info">
-                        <a href="#">Meredith</a>
+                        <a href="#" class="userName" data-friends="1,378">Meredith</a>
                         She doesn't love us anymore :(
 
                         <div class="comment__info">
@@ -272,7 +272,7 @@
                       <img src="images/Kyle.jpg" class="profilePhoto">
 
                       <div class="media__info">
-                        <a href="#">Kyle</a>
+                        <a href="#" class="userName" data-friends="89">Kyle</a>
                         I haven't seen you guys in forever either.....
 
                         <div class="comment__info">
@@ -288,7 +288,7 @@
                       <img src="images/Evin.jpg" class="profilePhoto">
 
                       <div class="media__info">
-                        <a href="#">Evin</a>
+                        <a href="#" class="userName"  data-friends="32">Evin</a>
                         Yeah, you don't count. You moved away >:|
 
                         <div class="comment__info">
@@ -318,7 +318,7 @@
                 <img src="images/user.png" class="profilePhoto">
 
                 <div class="media__info">
-                  <a href="#">Santo</a>
+                  <a href="#" class="userName" data-friends="167">Santo</a>
                   Anyone for Betrayal? OX DIBS!
 
                   <div class="comment__info">
@@ -359,12 +359,12 @@
   </div>
 </div>
 
-<div class="modal" style="display: none">
-  <div class="modal__content">
-    <div class="modal__close">X</div>
-    <div class="modal__title">Title</div>
-    <div class="modal__body">Nunc nec fermentum dolor. Duis at iaculis turpis. Sed rutrum elit ac egestas dapibus. Duis nec consequat enim.</div>
-  </div>
+<div class="modal" style="display: none"></div>
+
+<div class="modal__content" style="display: none">
+  <div class="modal__close">X</div>
+  <div class="modal__title">Title</div>
+  <div class="modal__body">This is a modal body.</div>
 </div>
 
 </body>
