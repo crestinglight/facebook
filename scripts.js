@@ -23,13 +23,13 @@ window.addEventListener("load", function(){
 	}
 
 	function clickLike(){
-
 		var likeLink = this.innerHTML;
 		var likeCounter = this.nextElementSibling.nextElementSibling.innerHTML;
 		
 		if (likeLink == "Like"){
 			this.innerHTML = "Unlike";
 			newLikeString = addLikeCount(likeCounter);
+			console.log(newLikeString);
 			this.nextElementSibling.nextElementSibling.innerHTML = newLikeString;
 		}
 		else {
@@ -43,28 +43,29 @@ window.addEventListener("load", function(){
 		addLikeArray = likecounter.split(" ");
 		likeNumber = parseInt(addLikeArray[0]);
 		addLikeNumber = likeNumber + 1;
-		likeOrLikes(addLikeNumber);
+		updateLike = likeOrLikes(addLikeNumber);
+		return updateLike;
 	}
 
 	function subtractLikeCount(likecounter){		
 		addLikeArray = likecounter.split(" ");
 		likeNumber = parseInt(addLikeArray[0]);
 		subLikeNumber = likeNumber - 1;
-		likeOrLikes(subLikeNumber);
+		updateLike = likeOrLikes(subLikeNumber);
+		return updateLike;
 	}
 
 	function likeOrLikes(likeNum){
+		
 		if (likeNum == 1){
-			likeBackToString = addLikeNumber.toString();
-			oneLike = likeBackToString + " like";
-			return oneLike;
+			likeBackToString = likeNum.toString();
+			newLike = likeBackToString + " like";
 		}
 		else {
-			likeBackToString = addLikeNumber.toString();
-			moreLikes = likeBackToString + " likes";
-			return moreLikes;
+			likeBackToString = likeNum.toString();
+			newLike = likeBackToString + " likes";
 		}
-		
+		return newLike;
 	}
 	
 	var replyCountArray = document.getElementsByClassName("replyCount");
