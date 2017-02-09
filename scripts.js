@@ -2,7 +2,7 @@ window.addEventListener("load", function(){
 
 	hideAllReplies();
 
-	function hideAllReplies(){
+	function hideAllReplies(e){
 		var replies = document.getElementsByClassName("replies");
 
 		for (var i = 0; i < replies.length; i++){
@@ -10,9 +10,9 @@ window.addEventListener("load", function(){
 		}
 	}
 
-	function showReplies(){
+	function showReplies(e){
 		
-		var nextReplyBlock = this.parentNode.nextElementSibling;
+		var nextReplyBlock = e.target.parentNode.nextElementSibling;
 
 		if (nextReplyBlock.style.display == "block"){
 			nextReplyBlock.style.display = "none";
@@ -20,23 +20,25 @@ window.addEventListener("load", function(){
 		else {
 			nextReplyBlock.style.display = "block";
 		}
+		e.preventDefault();
 	}
 
-	function clickLike(){
-		var likeLink = this.innerHTML;
-		var likeCounter = this.nextElementSibling.nextElementSibling.innerHTML;
+	function clickLike(e){
+		var likeLink = e.target.innerHTML;
+		var likeCounter = e.target.nextElementSibling.nextElementSibling.innerHTML;
 		
 		if (likeLink == "Like"){
-			this.innerHTML = "Unlike";
+			e.target.innerHTML = "Unlike";
 			newLikeString = addLikeCount(likeCounter);
 			console.log(newLikeString);
-			this.nextElementSibling.nextElementSibling.innerHTML = newLikeString;
+			e.target.nextElementSibling.nextElementSibling.innerHTML = newLikeString;
 		}
 		else {
-			this.innerHTML = "Like";
+			e.target.innerHTML = "Like";
 			newLikeString = subtractLikeCount(likeCounter);
-			this.nextElementSibling.nextElementSibling.innerHTML = newLikeString;
+			e.target.nextElementSibling.nextElementSibling.innerHTML = newLikeString;
 		}
+		e.preventDefault();
 	}
 
 	function addLikeCount(likecounter){
@@ -68,20 +70,19 @@ window.addEventListener("load", function(){
 		return newLike;
 	}
 
-	function commentSubmit(){
+	function commentSubmit(e){
 		
-		if (this.parentNode.childNodes[1].value == ""){
+		if (e.target.parentNode.childNodes[1].value == ""){
 			alert("The text box is currently empty! Type in your comment and I'll submit it for you.");
-			event.preventDefault();
+			e.preventDefault();
 		}
 		else {
 			var newCommentNum = updateCommentCounter();
 			var newString = newCommentString(newCommentNum);
-			this.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[3].innerHTML = newString;
-			event.preventDefault();
+			e.target.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[3].innerHTML = newString;
+			e.preventDefault();
 			getComment();
 		}
-
 	}
 
 	function updateCommentCounter(){
@@ -100,7 +101,24 @@ window.addEventListener("load", function(){
 
 	function getComment(){
 		userInput = document.getElementsByClassName("opcomment")[0].value;
-		alert(userInput);
+		setUpSkeletonComment(userInput);
+	}
+
+	function setUpSkeletonComment(userInput){
+		var skeleton = document.getElementsByClassName("commentSkeleton")[0];
+		var cloneSkeleton = skeleton.cloneNode(true);
+		var originalPost = document.getElementsByClassName("post__details")[0];
+		var newPost = originalPost.insertBefore(cloneSkeleton, originalPost.childNodes[3].nextSibling.nextSibling);
+		writeNewComment(userInput, newPost);
+	}
+
+	function writeNewComment(userInput, newpost){
+		newpost.style.display = "flex";
+		var textNode = document.createTextNode(userInput);
+		var origin = document.getElementsByClassName("commentSkeleton")[0].childNodes[3];
+		origin.insertBefore(textNode, origin.childNodes[3]);
+		debugger;
+		//newpost
 	}
 
 	function commentFocus(){
@@ -108,10 +126,10 @@ window.addEventListener("load", function(){
 		document.getElementsByClassName("opcomment")[0].focus();
 	}
 
-	function userNameModal(){
+	function userNameModal(e){
 
-		var userName = this.innerHTML;
-		var numOfFriends = this.dataset.friends;
+		var userName = e.target.innerHTML;
+		var numOfFriends = e.target.dataset.friends;
 		document.getElementsByClassName("modal__title")[0].innerHTML = userName;
 		if (numOfFriends == "0"){
 			document.getElementsByClassName("modal__body")[0].innerHTML = "Oh dear, you have no friends.";
@@ -143,10 +161,10 @@ window.addEventListener("load", function(){
 		modalXClicked2.style.display = "none";
 	}
 
-	function clickShare(){
+	function clickShare(e){
 
-		var userName = this.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerHTML
-		var shareThisComment = this.parentNode.parentNode.childNodes[3].innerHTML
+		var userName = e.target.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].innerHTML
+		var shareThisComment = e.target.parentNode.parentNode.childNodes[3].innerHTML
 		document.getElementsByClassName("modal__title")[0].innerHTML = userName;
 		document.getElementsByClassName("modal__body")[0].innerHTML = shareThisComment;
 		modalDisplay();
@@ -160,6 +178,7 @@ window.addEventListener("load", function(){
 	var modalXClick = document.getElementsByClassName("modal__close");
 	var modalGrayClick = document.getElementsByClassName("modal");
 	var shareClick = document.getElementsByClassName("action action--share");
+
 
 	commentClick[0].addEventListener('click', commentFocus);
 	modalXClick[0].addEventListener('click', closeModal);
@@ -180,7 +199,6 @@ window.addEventListener("load", function(){
 
 	for (var i = 0; i < nameClick.length; i++){
 		nameClick[i].addEventListener('click', userNameModal);
-
 	}
 	
 });
