@@ -79,6 +79,7 @@ window.addEventListener("load", function(){
 			var newString = newCommentString(newCommentNum);
 			this.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[3].innerHTML = newString;
 			event.preventDefault();
+			getComment();
 		}
 
 	}
@@ -95,6 +96,11 @@ window.addEventListener("load", function(){
 		var numString = newNum.toString();
 		var newCommentCount = numString + " comments";
 		return newCommentCount;
+	}
+
+	function getComment(){
+		userInput = document.getElementsByClassName("opcomment")[0].value;
+		alert(userInput);
 	}
 
 	function commentFocus(){
