@@ -76,13 +76,27 @@ window.addEventListener("load", function(){
 			e.preventDefault();
 		}
 		else {
-			// var newCommentNum = updateCommentCounter();
-			// var newString = newCommentString(newCommentNum);
-			// e.target.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[3].innerHTML = newString;
+			var newReplyNum = updateReplyCounter(e);
+			var newString = newReplyString(newReplyNum);
+			e.target.parentNode.parentNode.parentNode.parentNode.previousSibling.previousSibling.childNodes[3].innerHTML = newString;
 			e.preventDefault();
 			getReply(e);
 			e.target.parentNode.reset();
 		}
+	}
+
+	function updateReplyCounter(e){
+		var commentReplyOriginal = e.target.parentNode.parentNode.parentNode.parentNode.previousSibling.previousSibling.childNodes[3].innerHTML;
+		var splitString = commentReplyOriginal.split(" ");
+		var replyNum = parseInt(splitString[0]);
+		var addedReplyNum = replyNum + 1;
+		return addedReplyNum;
+	}
+
+	function newReplyString(newNum){
+		var numString = newNum.toString();
+		var newReplyCount = numString + " replies";
+		return newReplyCount;
 	}
 
 	function getReply(e){
@@ -159,9 +173,9 @@ window.addEventListener("load", function(){
 		document.getElementsByClassName("commentSkeleton")[0].className = "comment media";
 	}
 
-	function commentFocus(){
-		
+	function commentFocus(e){
 		document.getElementsByClassName("opcomment")[0].focus();
+		e.preventDefault();
 	}
 
 	function userNameModal(e){
