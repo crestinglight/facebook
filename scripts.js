@@ -70,6 +70,43 @@ window.addEventListener("load", function(){
 		return newLike;
 	}
 
+	function replySubmit(e){
+		if (e.target.parentNode.childNodes[1].value == ""){
+			alert("The text box is currently empty! Type in your comment and I'll submit it for you.");
+			e.preventDefault();
+		}
+		else {
+			// var newCommentNum = updateCommentCounter();
+			// var newString = newCommentString(newCommentNum);
+			// e.target.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[3].innerHTML = newString;
+			e.preventDefault();
+			getReply(e);
+			e.target.parentNode.reset();
+		}
+	}
+
+	function getReply(e){
+		userInput = e.target.parentNode.childNodes[1].value;
+		e.target.parentNode.childNodes[1].value = "";
+		setUpSkeletonReply(userInput, e);
+	}
+
+	function setUpSkeletonReply(userInput, e){
+		var skeleton = document.getElementsByClassName("commentSkeleton")[0];
+		var cloneSkeleton = skeleton.cloneNode(true);
+		var replyClass = e.target.parentNode.parentNode.parentNode.parentNode
+		var newPost = replyClass.insertBefore(cloneSkeleton, e.target.parentNode.parentNode.parentNode);
+		writeNewReply(userInput, newPost);
+	}
+
+	function writeNewReply(userInput, newpost){
+		newpost.style.display = "flex";
+		var textNode = document.createTextNode(userInput);
+		var origin = document.getElementsByClassName("commentSkeleton")[0].childNodes[3];
+		origin.insertBefore(textNode, origin.childNodes[3]);
+		document.getElementsByClassName("commentSkeleton")[0].className = "comment media";
+	}
+
 	function commentSubmit(e){
 		
 		if (e.target.parentNode.childNodes[1].value == ""){
@@ -82,6 +119,7 @@ window.addEventListener("load", function(){
 			e.target.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[3].innerHTML = newString;
 			e.preventDefault();
 			getComment();
+			e.target.parentNode.reset();
 		}
 	}
 
@@ -101,6 +139,7 @@ window.addEventListener("load", function(){
 
 	function getComment(){
 		userInput = document.getElementsByClassName("opcomment")[0].value;
+		document.getElementsByClassName("opcomment")[0].value = "";
 		setUpSkeletonComment(userInput);
 	}
 
@@ -117,8 +156,7 @@ window.addEventListener("load", function(){
 		var textNode = document.createTextNode(userInput);
 		var origin = document.getElementsByClassName("commentSkeleton")[0].childNodes[3];
 		origin.insertBefore(textNode, origin.childNodes[3]);
-		debugger;
-		//newpost
+		document.getElementsByClassName("commentSkeleton")[0].className = "comment media";
 	}
 
 	function commentFocus(){
@@ -173,6 +211,7 @@ window.addEventListener("load", function(){
 	var replyCountArray = document.getElementsByClassName("replyCount");
 	var likeCountArray = document.getElementsByClassName("likeClick");
 	var submitCommentArray = document.getElementsByClassName("submitComment");
+	var submitReplyArray = document.getElementsByClassName("submitReply");
 	var commentClick = document.getElementsByClassName("action action--comment");
 	var nameClick = document.getElementsByClassName("userName");
 	var modalXClick = document.getElementsByClassName("modal__close");
@@ -184,6 +223,7 @@ window.addEventListener("load", function(){
 	modalXClick[0].addEventListener('click', closeModal);
 	modalGrayClick[0].addEventListener('click', closeModal);
 	shareClick[0].addEventListener('click', clickShare);
+	submitCommentArray[0].addEventListener('click', commentSubmit);
 
 	for (var i = 0; i < replyCountArray.length; i++){
 		replyCountArray[i].addEventListener('click', showReplies);
@@ -193,8 +233,8 @@ window.addEventListener("load", function(){
 		likeCountArray[x].addEventListener('click', clickLike);
 	}
 
-	for (var y = 0; y < submitCommentArray.length; y++){
-		submitCommentArray[y].addEventListener('click', commentSubmit);
+	for (var y = 0; y < submitReplyArray.length; y++){
+		submitReplyArray[y].addEventListener('click', replySubmit);
 	}
 
 	for (var i = 0; i < nameClick.length; i++){
